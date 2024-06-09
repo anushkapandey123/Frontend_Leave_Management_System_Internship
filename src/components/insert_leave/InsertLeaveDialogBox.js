@@ -1,4 +1,4 @@
-import { Alert, Button, Dialog, DialogContent, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogContent, InputLabel, MenuItem, Select, Snackbar, TextField, Typography } from "@mui/material";
 import { Field, Form, Formik, useField} from "formik";
 import React, { useState } from "react";
 import styles from "./styles/InsertLeaveStyles"
@@ -15,20 +15,23 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
     const [success, setSuccess] = useState(null)
     const classes = styles();
     const [date, setDate] = useState(new Date());
-    const [dateEnd, setDateEnd] = useState(new Date())
+    const [dateEnd, setDateEnd] = useState(new Date());
+    const [leaveType, setLeaveType] = useState("");
 
     const handleSubmit = async (values) => {
         console.log("inside handle submit")
         values.empId = Number(values.empId)
         values.startDate = date;
         values.endDate = dateEnd;
-        values.startDate = values.startDate.toISOString().split('T')[0]
-        values.endDate = values.endDate.toISOString().split('T')[0]
+        
+        values.startDate = (values.startDate).toISOString().split('T')[0]
+        values.endDate = (values.endDate).toISOString().split('T')[0]
         values.startDate = (values.startDate).replaceAll("/", "-")
         values.endDate = (values.endDate).replaceAll("/", "-")
+        values.leaveType = leaveType
 
         
-        
+        console.log(values.startDate)
         console.log(values)
 
         try {
@@ -49,6 +52,12 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
         }
 
     }
+
+    const handleChange = (event) => {
+        console.log(event.target.value);
+        setLeaveType(event.target.value)
+        
+    }
     
 
     return (
@@ -60,8 +69,8 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
         </Typography>
         
         <Formik initialValues={initialValues}
-        /* // validationSchema={formSchema}
-        // validateOnChange={true} */
+        // validationSchema={formSchema}
+        // validateOnChange={true} 
         // <Formik
 
         onSubmit={handleSubmit}
@@ -71,6 +80,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
 
             () => {
                 return (
+
                     <Form>
                         <DialogContent className={classes.dialogContent}>
                             <FormikTextField
@@ -83,6 +93,10 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
                             autoComplete="off"
                             />
 
+
+
+
+
                             {/* <FormikTextField
                             required
                             margin="dense"
@@ -91,6 +105,24 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
                             label="Start date"
                             />
                              */}
+
+<InputLabel id="demo-simple-select-label">Leave Type</InputLabel>
+
+<Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={leaveType}
+          label="Leave Type"
+          onChange={handleChange}
+        >
+          <MenuItem value={"paid"}>Paid</MenuItem>
+          <MenuItem value={"casual"}>Casual</MenuItem>
+          
+        </Select>
+
+
+
+
 
                             <div style={{ marginTop: "25px"}}>
                              <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -126,7 +158,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
 
                              
                         
-                            <Button variant="contained" type="submit">Submit</Button>
+                            <Button variant="contained" type="submit" style={{marginTop: "7px", marginBottom: "5px", backgroundColor: "#8B0000"}}>Submit</Button>
                         
 
 
@@ -134,6 +166,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
                             
                         </DialogContent>
                     </Form>
+
                 )
             }
             

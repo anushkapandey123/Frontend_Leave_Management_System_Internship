@@ -45,7 +45,7 @@ const MyCalendar = () => {
         method: 'GET',
     }).then((response) => {
         
-        // console.log(response.data)
+        console.log(response.data)
         setData(response.data)
     }
     )
@@ -65,7 +65,7 @@ const MyCalendar = () => {
             const element = {
                 start: moment(d.startdate).toDate(),
                 end: moment(d.enddate).toDate(),
-                title: d.empid,
+                title: d.name,
             }
     
             events.push(element)
@@ -74,6 +74,8 @@ const MyCalendar = () => {
     }
 
     formatData();
+
+    
 
     
 
@@ -90,8 +92,8 @@ const MyCalendar = () => {
       views={['month']}
       style={{ height: 600, backgroundColor: 'white' }}
       
-      showAllEvents={true}
-    />
+    //   showAllEvents={true}
+   />
     )
   
 }
