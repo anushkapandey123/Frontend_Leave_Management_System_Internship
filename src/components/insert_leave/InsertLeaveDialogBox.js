@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import styles from "./styles/InsertLeaveStyles"
 import { formSchema, initialValues } from "./services/InsertLeaveFormService";
 import FormikTextField from "../formik/FormikTextField";
-import InsertLeaveService from "./services/InsertLeaveService";
 import axios from "axios";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
@@ -18,20 +17,23 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
     const [dateEnd, setDateEnd] = useState(new Date());
     const [leaveType, setLeaveType] = useState("");
 
+    
+
     const handleSubmit = async (values) => {
         console.log("inside handle submit")
         values.empId = Number(values.empId)
-        values.startDate = date;
-        values.endDate = dateEnd;
+        console.log(date)
+        values.startDate = date.$d
+        values.endDate = dateEnd.$d;
         
-        values.startDate = (values.startDate).toISOString().split('T')[0]
-        values.endDate = (values.endDate).toISOString().split('T')[0]
-        values.startDate = (values.startDate).replaceAll("/", "-")
-        values.endDate = (values.endDate).replaceAll("/", "-")
+        values.startDate = new Date(values.startDate.getTime() - (values.startDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
+        
+        values.endDate = new Date(values.endDate.getTime() - (values.endDate.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
+        
         values.leaveType = leaveType
 
         
-        console.log(values.startDate)
+        
         console.log(values)
 
         try {
@@ -126,7 +128,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
 
                             <div style={{ marginTop: "25px"}}>
                              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                             <DatePicker selected={date} onChange={(date) => setDate(date)} label="Enter start date"/>
+                             <DatePicker name="startDate" selected={date} onChange={(date) => setDate(date)} label="Enter start date"/>
                              </LocalizationProvider>
                              </div>
 
@@ -143,7 +145,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
                         
                         <div style={{ marginTop: "25px"}}> 
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                             <DatePicker selected={dateEnd} onChange={(dateEnd) => setDateEnd(dateEnd)} label="Enter end date"/>
+                             <DatePicker name="endDate" selected={dateEnd} onChange={(dateEnd) => setDateEnd(dateEnd)} label="Enter end date"/>
                              </LocalizationProvider>
                         </div>
 

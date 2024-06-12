@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import DeleteIcon from '@mui/icons-material/Delete';
+import UpdateIcon from '@mui/icons-material/Update';
 import axios from 'axios';
 import DeleteConfirmationSlider from './DeleteConfirmationSlider';
 
@@ -85,6 +86,7 @@ export default function FullScreenDialog({open, onClose}) {
         </AppBar>
 
         {data.map(function(e) {
+
           return (
             
               <ListItemButton>
@@ -92,11 +94,14 @@ export default function FullScreenDialog({open, onClose}) {
               <h5 style={{color: "#1976d2"}}>Start Date </h5> <h5>{e.startdate.substring(0, e.startdate.indexOf('T'))}</h5>
               <h5 style={{color: "#1976d2"}}>End Date </h5> <h5>{e.enddate.substring(0, e.enddate.indexOf('T'))}</h5>
               <h5 style={{color: "#1976d2"}}>Leave Type </h5> <h5>{e.leavetype}</h5>
+              <h5 style={{color: "#1976d2"}}>Paid Leaves Left </h5> <h5>{e.remaining_paid_leaves}</h5>
+              <h5 style={{color: "#1976d2"}}>Casual Leaves Left </h5> <h5>{e.remaining_casual_leaves}</h5>
               </p>
               
             <Button defaultValue={e} onClick={() => handleClick(e)} >
             <DeleteIcon color="error" />
             </Button>
+
             
 
             </ListItemButton>
