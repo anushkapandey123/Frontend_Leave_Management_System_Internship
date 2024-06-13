@@ -4,46 +4,36 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '/Users/anushka.pandey_int/Documents/Leave_Managament_Frontend/leave_management_system_frontend/src/components/calender/styles/CalenderComponentStyle.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import userToken from '../../helpers/constant';
+import apiClient from '../../helpers/apiClient';
 
 const localizer = momentLocalizer(moment);
 
 
-// const events = [
-//     // {
-//     //     start: moment("2024-05-31").toDate(),
-//     //     end: moment("2024-05-31").toDate(),
-//     //     title: "Standup",
-
-//     // },
-
-//     // {
-//     //     start: moment("2024-05-24").toDate(),
-//     //     end: moment("2024-05-25").toDate(),
-//     //     title: "Work from home",
-
-//     // },
-
-//     // {
-//     //     start: moment("2024-09-02T00:00:00Z").toDate(),
-//     //     end: moment("2024-09-20T00:00:00Z").toDate(),
-//     //     title: "IPM",
-
-//     // },
-// ];
 
 const MyCalendar = () => {
 
     const [data, setData] = useState([]);
     const events = []
 
-
+    
 
     useEffect(() => {
         const fetchData = async() => {
+            // var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpc2hvcmVAZ21haWwuY29tIiwiZXhwIjoxNzE4Mjk1MzQyfQ.V4c3dSTwtSTyNYWG1-mhsqX_pHxBZ7Wbk9IMDWlDqlA"
+            // var token = userToken
+            // const headers = { 'Authorization': "Bearer " + token }
+            apiClient.get('/leave_detail')
+            // axios.get("http://localhost:8080/leave_detail", {
+                // headers
+                // headers: {
+                //     'Authorization': 'Bearer ' + token
 
-            axios.get("http://localhost:8080/leave_detail", {
-        method: 'GET',
-    }).then((response) => {
+                // },
+        // method: 'GET',
+
+        
+    .then((response) => {
         
         console.log(response.data)
         setData(response.data)
@@ -97,5 +87,27 @@ const MyCalendar = () => {
     )
   
 }
+
+
+// const MyCalendar = () => {
+//     const [events, setEvents] = useState([]);
+ 
+//     useEffect(() => {
+//         const fetchData = async () => {
+//             try {
+//                 const response = await apiClient.get('/leave_detail'); // Use apiClient instead of axios
+//                 const formattedEvents = response.data.map(event => ({
+//                     start: moment(event.startdate).toDate(),
+//                     end: moment(event.enddate).toDate(),
+//                     title: event.name,
+//                 }));
+//                 setEvents(formattedEvents);
+//             } catch (error) {
+//                 console.error('Failed to fetch events', error);
+//             }
+//         };
+//         fetchData();
+//     }, []);
+// }
 
 export default MyCalendar;

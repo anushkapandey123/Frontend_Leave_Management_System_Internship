@@ -1,7 +1,7 @@
 import {date, object, string} from "yup";
 
 export const initialValues = {
-    empId: "",
+    // empId: "",
     startDate: new Date(),
     endDate: new Date(),
     leaveType: '',

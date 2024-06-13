@@ -15,6 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from '@mui/icons-material/Update';
 import axios from 'axios';
 import DeleteConfirmationSlider from './DeleteConfirmationSlider';
+import userToken from '../../helpers/constant';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -30,9 +31,12 @@ export default function FullScreenDialog({open, onClose}) {
 
     React.useEffect(() => {
         const fetchData = async() => {
+          // var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpc2hvcmVAZ21haWwuY29tIiwiZXhwIjoxNzE4Mjk1MzQyfQ.V4c3dSTwtSTyNYWG1-mhsqX_pHxBZ7Wbk9IMDWlDqlA"
+          var token = userToken
+            const headers = { 'Authorization': "Bearer " + token }
 
-            axios.get("http://localhost:8080/leave_detail", {
-        method: 'GET',
+            axios.get("http://localhost:8080/leave_detail", { headers
+        // method: 'GET',
     }).then((response) => {
         
         console.log(response.data)

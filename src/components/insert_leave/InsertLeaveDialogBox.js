@@ -8,6 +8,7 @@ import axios from "axios";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import userToken from "../../helpers/constant";
 // import {Form, Formik} from "formik";
 
 const InsertLeaveDialogBox = ({open, onClose}) => {
@@ -21,7 +22,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
 
     const handleSubmit = async (values) => {
         console.log("inside handle submit")
-        values.empId = Number(values.empId)
+        // values.empId = Number(values.empId)
         console.log(date)
         values.startDate = date.$d
         values.endDate = dateEnd.$d;
@@ -38,7 +39,11 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
 
         try {
 
-            const response = await axios.post("http://localhost:8080/insert", values);
+            // var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpc2hvcmVAZ21haWwuY29tIiwiZXhwIjoxNzE4Mjk1MzQyfQ.V4c3dSTwtSTyNYWG1-mhsqX_pHxBZ7Wbk9IMDWlDqlA"
+            var token = userToken
+            const headers = { 'Authorization': "Bearer " + token }
+
+            const response = await axios.post("http://localhost:8080/insert", values, { headers });
             console.log(response)
             setSuccess(true)
 
@@ -85,7 +90,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
 
                     <Form>
                         <DialogContent className={classes.dialogContent}>
-                            <FormikTextField
+                            {/* <FormikTextField
                             required
                             margin="dense"
                             inputProps={{"data-testid": "empId"}}
@@ -93,7 +98,7 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
                             label="Employee Id"
                             fullWidth
                             autoComplete="off"
-                            />
+                            /> */}
 
 
 
