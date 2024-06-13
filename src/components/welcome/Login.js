@@ -32,7 +32,7 @@ const Login = () => {
                 </div>
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                <a href="#">Forgot Your Password?</a>
+                {/* <a href="#">Forgot Your Password?</a> */}
                 <button type="submit">Sign In</button>
                 {error && <p className="error">{error}</p>}
             </form>

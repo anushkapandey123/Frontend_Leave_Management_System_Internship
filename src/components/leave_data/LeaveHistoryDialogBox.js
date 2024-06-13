@@ -17,6 +17,7 @@ import axios from 'axios';
 import DeleteConfirmationSlider from './DeleteConfirmationSlider';
 import userToken from '../../helpers/constant';
 import apiClient from '../../helpers/apiClient';
+import Box from '@mui/material/Box';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -73,7 +74,7 @@ export default function FullScreenDialog({open, onClose}) {
         onClose={onClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative', bgcolor: "#8B0000" }}>
+        <AppBar sx={{ position: 'relative', bgcolor: "#8E2A2C" }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -83,8 +84,16 @@ export default function FullScreenDialog({open, onClose}) {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              My Leave Record
+            <Typography 
+              variant="h6" 
+              component="div" 
+              sx={{ 
+                flex: 1, 
+                textAlign: 'center',
+                fontFamily: 'Montserrat, sans-serif' 
+              }}
+            >
+              Leave History
             </Typography>
             
           </Toolbar>
@@ -104,12 +113,14 @@ export default function FullScreenDialog({open, onClose}) {
               </p>
               
             <Button defaultValue={e} onClick={() => handleClick(e)} >
-            <DeleteIcon color="error" />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', width: '100%' }}>
+              <DeleteIcon color="error" />
+            </Box>
             </Button>
 
             
-
             </ListItemButton>
+
             
             
           )

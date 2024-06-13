@@ -1,7 +1,7 @@
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import '/Users/anushka.pandey_int/Documents/Leave_Managament_Frontend/leave_management_system_frontend/src/components/calender/styles/CalenderComponentStyle.css'
+import "./styles/CalenderComponentStyle.css"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AppBar, Dialog, DialogContent, IconButton, Slide, Toolbar, Typography } from '@mui/material';
@@ -64,7 +64,7 @@ const GenericCalendar = ({ open, onClose }) => {
         onClose={onClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative', bgcolor: "#8B0000" }}>
+        <AppBar sx={{ position: 'relative', bgcolor: "#8E2A2C" }}>
           <Toolbar>
             <IconButton
               edge="start"
@@ -74,7 +74,15 @@ const GenericCalendar = ({ open, onClose }) => {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography 
+              variant="h6" 
+              component="div" 
+              sx={{ 
+                flex: 1, 
+                textAlign: 'center',
+                fontFamily: 'Montserrat, sans-serif' 
+              }}
+            >
               Team Calendar
             </Typography>
             

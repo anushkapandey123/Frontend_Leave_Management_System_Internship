@@ -1,7 +1,7 @@
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import '/Users/anushka.pandey_int/Documents/Leave_Managament_Frontend/leave_management_system_frontend/src/components/calender/styles/CalenderComponentStyle.css'
+import './styles/CalenderComponentStyle.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import userToken from '../../helpers/constant';
@@ -80,7 +80,7 @@ const MyCalendar = () => {
       endAccessor="end"
       events={events}
       views={['month']}
-      style={{ height: 600, backgroundColor: 'white' }}
+      style={{height: 600, backgroundColor: 'white' }}
       
     //   showAllEvents={true}
    />
