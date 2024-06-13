@@ -9,6 +9,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import userToken from "../../helpers/constant";
+import apiClient from "../../helpers/apiClient";
 // import {Form, Formik} from "formik";
 
 const InsertLeaveDialogBox = ({open, onClose}) => {
@@ -40,10 +41,11 @@ const InsertLeaveDialogBox = ({open, onClose}) => {
         try {
 
             // var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imtpc2hvcmVAZ21haWwuY29tIiwiZXhwIjoxNzE4Mjk1MzQyfQ.V4c3dSTwtSTyNYWG1-mhsqX_pHxBZ7Wbk9IMDWlDqlA"
-            var token = userToken
-            const headers = { 'Authorization': "Bearer " + token }
+            // var token = userToken
+            // const headers = { 'Authorization': "Bearer " + token }
 
-            const response = await axios.post("http://localhost:8080/insert", values, { headers });
+            // const response = await axios.post("http://localhost:8080/insert", values, { headers });
+            const response = await apiClient.post('/insert', values)
             console.log(response)
             setSuccess(true)
 
